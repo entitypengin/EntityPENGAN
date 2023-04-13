@@ -36,8 +36,8 @@ async def on_message(message):
     print(message.content)
     if message.author.bot:
         return
-    if message.content.startswith("npec/help"):
-        await message.channel.send("https://entitypengin.github.io/npecbot/")
+    if message.content.startswith("!!help"):
+        await message.channel.send("!!help")
 
 
 keep_alive()
