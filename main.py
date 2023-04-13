@@ -37,7 +37,7 @@ async def on_message(message):
     if message.author.bot:
         return
     if message.content.startswith("!!help"):
-        await message.channel.send("!!help")
+        await message.channel.send("/tableflip a")
 
 
 keep_alive()
