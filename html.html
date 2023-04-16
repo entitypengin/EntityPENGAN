@@ -15,7 +15,7 @@
                 const request = new XMLHttpRequest();
                 request.open("POST", url);
                 request.setRequestHeader('Content-type', 'application/json');
-                request.send(params);
+                request.send(JSON.stringify(params));
             }
         </script>
     </head>
