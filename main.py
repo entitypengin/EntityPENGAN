@@ -11,7 +11,7 @@ from server import keep_alive
 
 discord_token = os.environ["DISCORD_TOKEN"]
 bot_channel_id = int(os.environ["BOT_CHANNEL_ID"])
-bump_channel_id = int(os.environ["BUMP_CHANNEL_ID"])
+# bump_channel_id = int(os.environ["BUMP_CHANNEL_ID"])
 
 intents = discord.Intents.default()
 intents.message_content = True
