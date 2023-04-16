@@ -32,12 +32,11 @@ async def on_ready():
 
 
 @client.event
-async def on_message(message):
-    print(f"{message.author}: {message.content}")
+async def on_message(message: discord.Message):
+    print(f"""On {message.channel}
+{message.author}: {message.content}""")
     if message.author.bot:
         return
-    if message.content.startswith("!!help"):
-        await message.channel.send("/tableflip a")
 
 
 keep_alive()
