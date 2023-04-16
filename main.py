@@ -33,7 +33,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message: discord.Message):
-    print(f"""On {message.channel}
+    print(f"""On {message.channel}, {message.channel.guild}
 {message.author}: {message.content}""")
     if message.author.bot:
         return
