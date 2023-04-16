@@ -33,7 +33,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    print(message.content)
+    print(f"{message.author}: {message.content}")
     if message.author.bot:
         return
     if message.content.startswith("!!help"):
