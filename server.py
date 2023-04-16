@@ -11,7 +11,7 @@ app = Flask("")
 
 @app.route("/")
 def main():
-    return "pengan is alive"
+    return "<!DOCTYPE html><head>pengan is alive<head>"
 
 
 def run() -> None:
