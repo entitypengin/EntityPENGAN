@@ -5,11 +5,12 @@
             function Send() {
                 const message = document.getElementById("textbox");
 
-                const url = 'https://discord.com/api/webhooks/1096970533012258918/u7AP4XYf9SA9xhrhCGAycRAP_Q0m5QxIX5ZzW0VAnjH1p1c75Bdv84XoCXH64TeLzul0';
+                const url = 'https://discord.com/api/webhooks/1096968790920659016/IKte6h7j1bTkIKw9oPOEEj8NeQ4Bf3JGBqUZpFJw5NJVs1ki1XvQ45ClbxtHc4_L0ZCt';
 
                 const params = {
                     username: "ぺんがん",
-                    content: message,
+                    avatar_url: "https://raw.githubusercontent.com/entitypengin/entitypengan/main/neg_avagu.jpeg",
+                    content: message
                 }
                 const request = new XMLHttpRequest();
                 request.open("POST", url);
