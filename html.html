@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            function Send() {
+                const message = document.getElementById("textbox");
+
+                const url = 'https://discord.com/api/webhooks/1096964464781308044/hxzz694mZBMNbQTZrbyc4yljK78-YHIAhhAAUtNwJWoeA3yyoZi2q9YFZtj2UvGWT27q';
+
+                const params = {
+                    username: "ぺんがん",
+                    content: message,
+                }
+                const request = new XMLHttpRequest();
+                request.open("POST", url);
+                request.setRequestHeader('Content-type', 'application/json');
+                request.send(params);
+            }
+        </script>
+    </head>
+    <body>
+        pengan is alive!
+        <input type="text" id="textbox">
+        <input type="button" value="Send" onclick="Send();">
+    </body>
+</html>
