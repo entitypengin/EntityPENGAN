@@ -3,7 +3,7 @@
     <head>
         <script>
             function Send() {
-                const message = String(document.getElementById("textbox"));
+                const message = document.getElementById("textbox").textContent;
 
                 const url = 'https://discord.com/api/webhooks/1096976884681674882/gD_Krm9hjWgPtqG-2qRDHDNVJ-0-eFNNUDp57gOGvYq4B0oqfac8ZhRh5G06ablm4fgz';
 
