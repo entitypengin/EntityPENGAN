@@ -22,9 +22,8 @@ client = discord.Client(intents=intents)
 @tasks.loop(seconds=60)
 async def loop():
     now = datetime.datetime.now()
-    if (now.hour % 2, now.minute) == (0, 0):
-        if now.hour == 22:
-            await client.get_channel(bot_channel_id).send("ohayo")
+    if (now.hour, now.minute) == (22, 0):
+        await client.get_channel(bot_channel_id).send("ohayo")
     elif (now.hour, now.minute) == (13, 0):
         await client.get_channel(bot_channel_id).send("oyasumi")
 
