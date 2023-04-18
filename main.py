@@ -5,6 +5,7 @@ import datetime
 import os
 
 import discord
+import discord.app_commands
 from discord.ext import tasks
 
 from server import keep_alive
@@ -26,6 +27,9 @@ async def loop():
         await client.get_channel(bot_channel_id).send("ohayo")
     elif (now.hour, now.minute) == (13, 0):
         await client.get_channel(bot_channel_id).send("oyasumi")
+    elif now.minute == 50:
+        if now.hour % 2 == 1:
+            ...
 
 
 @client.event
@@ -41,6 +45,8 @@ async def on_message(message: discord.Message):
 {message.author}: {message.content}""")
     if message.author.bot:
         return
+    if message.content.startswith("!!help"):
+        await message.channel.send("ヘルプ: !!help")
 
 
 keep_alive()
