@@ -11,8 +11,7 @@ app = Flask("")
 
 @app.route("/")
 def main() -> str:
-    with open("html.html") as f:
-        return f.read()
+    return "alive"
 
 
 def run() -> None:
