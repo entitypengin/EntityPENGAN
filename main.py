@@ -34,6 +34,9 @@ async def loop():
 async def on_ready():
     print(f"We have logged in as {client.user}")
     await client.change_presence(activity=discord.Game(name="!!help", type=1))
+
+    # await client.get_channel(bot_channel_id).send("")
+
     loop.start()
 
 
