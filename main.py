@@ -24,8 +24,11 @@ async def loop():
     now = datetime.datetime.now()
     if (now.hour, now.minute) == (22, 0):
         await client.get_channel(bot_channel_id).send("ohayo")
-    elif (now.hour, now.minute) == (13, 0):
+    elif now.weekday() != 5 and (now.hour, now.minute) == (13, 0):
         await client.get_channel(bot_channel_id).send("oyasumi")
+    elif (now.weekday(), now.hour, now.minute) == (5, 15, 0):
+        await client.get_channel(bot_channel_id).send("oyasumi")
+
     elif (now.hour, now.minute) == (15, 0):
         await client.get_channel(bot_channel_id).send("geosta")
 
