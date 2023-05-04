@@ -16,41 +16,39 @@ bot_channel_id = int(os.environ["BOT_CHANNEL_ID"])
 intents = discord.Intents.default()
 intents.message_content = True
 
-client = discord.Client(intents=intents)
 
+class Pengan(discord.Client):
+    def __init__(self):
+        super().__init__(intents=intents)
 
-@tasks.loop(seconds=60)
-async def loop():
-    now = datetime.datetime.now()
-    if (now.hour, now.minute) == (22, 0):
-        await client.get_channel(bot_channel_id).send("ohayo")
-    elif now.weekday() != 5 and (now.hour, now.minute) == (13, 0):
-        await client.get_channel(bot_channel_id).send("oyasumi")
-    elif (now.weekday(), now.hour, now.minute) == (5, 15, 0):
-        await client.get_channel(bot_channel_id).send("oyasumi")
+    async def on_ready(self):
+        print(f"We have logged in as {self.user}")
+        await self.change_presence(activity=discord.Game(name="!!help", type=1))
 
-    elif (now.hour, now.minute) == (15, 0):
-        await client.get_channel(bot_channel_id).send("geosta")
+        # await client.get_channel(bot_channel_id).send("")
 
+        self.loop.start()
 
-@client.event
-async def on_ready():
-    print(f"We have logged in as {client.user}")
-    await client.change_presence(activity=discord.Game(name="!!help", type=1))
-
-    # await client.get_channel(bot_channel_id).send("")
-
-    loop.start()
-
-
-@client.event
-async def on_message(message: discord.Message):
-    print(f"""On {message.channel}, {message.channel.guild} ({message.channel.id})
+    async def on_message(self, message: discord.Message):
+        print(f"""On {message.channel}, {message.channel.guild} ({message.channel.id})
 {message.author}: {message.content}""")
-    if message.author.bot:
-        return
-    if message.content.startswith("!!help"):
-        await message.channel.send("ヘルプ: !!help")
+        if message.author == self.user:
+            return
+        if message.content.startswith("!!help"):
+            await message.channel.send("ヘルプ: !!help")
+
+    @tasks.loop(seconds=60)
+    async def loop(self):
+        now = datetime.datetime.now()
+        if (now.hour, now.minute) == (22, 0):
+            await self.get_channel(bot_channel_id).send("ohayo")
+        elif (now.hour, now.minute) == (13, 0):
+            await self.get_channel(bot_channel_id).send("oyasumi")
+        elif (now.hour, now.minute) == (15, 0):
+            await self.get_channel(bot_channel_id).send("geosta")
+
+
+client = Pengan()
 
 
 keep_alive()
