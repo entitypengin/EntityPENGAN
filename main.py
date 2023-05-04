@@ -27,7 +27,7 @@ class Pengan(discord.Client):
 
         # await client.get_channel(bot_channel_id).send("")
 
-        self.loop.start()
+        loop.start()
 
     async def on_message(self, message: discord.Message):
         print(f"""On {message.channel}, {message.channel.guild} ({message.channel.id})
@@ -37,15 +37,16 @@ class Pengan(discord.Client):
         if message.content.startswith("!!help"):
             await message.channel.send("ヘルプ: !!help")
 
-    @tasks.loop(seconds=60)
-    async def loop(self):
-        now = datetime.datetime.now()
-        if (now.hour, now.minute) == (22, 0):
-            await self.get_channel(bot_channel_id).send("ohayo")
-        elif (now.hour, now.minute) == (13, 0):
-            await self.get_channel(bot_channel_id).send("oyasumi")
-        elif (now.hour, now.minute) == (15, 0):
-            await self.get_channel(bot_channel_id).send("geosta")
+
+@tasks.loop(seconds=60)
+async def loop():
+    now = datetime.datetime.now()
+    if (now.hour, now.minute) == (22, 0):
+        await client.get_channel(bot_channel_id).send("ohayo")
+    elif (now.hour, now.minute) == (13, 0):
+        await client.get_channel(bot_channel_id).send("oyasumi")
+    elif (now.hour, now.minute) == (15, 0):
+        await client.get_channel(bot_channel_id).send("geosta")
 
 
 client = Pengan()
