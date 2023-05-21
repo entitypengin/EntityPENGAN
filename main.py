@@ -25,7 +25,10 @@ class Pengan(discord.Client):
         print(f"We have logged in as {self.user}")
         await self.change_presence(activity=discord.Game(name="!!help", type=1))
 
-        # await client.get_channel(bot_channel_id).send("")
+        # async for message in client.get_channel(1064131569159258183).history(limit=20):
+        #     print(message.content)
+        # await client.get_channel(1060224631216287816).send("""フライングありなのそれ""")
+        # await client.get_channel(bot_channel_id).send("""熱帯夜あつい""")
 
         loop.start()
 
