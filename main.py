@@ -48,9 +48,7 @@ On {message.channel}, {message.channel.guild} ({message.channel.id})
         if "oyasumi" in message.content.lower():
             await message.add_reaction("<:emoji_2:1074290659135066163>")
         if "geosta" in message.content.lower() or "努力 未来 a geoffroyi star" in message.content.lower():
-            await message.add_reaction(
-                "<:otonadechi:1065560408934592582>" if random.random() < 0.5 else "<:PENGIN_LV98:1097096256939114517>"
-            )
+            await message.add_reaction("<:PENGIN_LV98:1097096256939114517>")
         if "充 電 し な き ゃ 　敵 の 命 で ね" in message.content.lower():
             await message.add_reaction("\N{Black Heart}")
 
