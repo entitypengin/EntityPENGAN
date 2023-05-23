@@ -39,6 +39,8 @@ class Pengan(discord.Client):
             return
         if message.content.startswith("!!help"):
             await message.channel.send("ヘルプ: !!help")
+        elif "ohayo" in message.content.lower().strip() or "oyasumi" in message.content.lower().strip():
+            await message.add_reaction("\N{Black Heart}")
 
 
 @tasks.loop(seconds=60)
