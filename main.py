@@ -3,6 +3,7 @@
 
 import datetime
 import os
+import random
 
 import discord
 import discord.app_commands
@@ -29,24 +30,26 @@ class Pengan(discord.Client):
 
         # async for message in client.get_channel().history(limit=20):
         #     print(message.content)
-        # await client.get_channel().send("""フライングありなのそれ""")
+        # await client.get_channel().send()
 
         loop.start()
 
     async def on_message(self, message: discord.Message):
-        print(f"""On {message.channel}, {message.channel.guild} ({message.channel.id})
-{message.author}: {message.content}
-""")
+        print(f"""
+On {message.channel}, {message.channel.guild} ({message.channel.id})
+{message.author}: {message.content}""")
         if message.author == self.user:
             return
-        if message.content.startswith("!!help"):
+        if message.content == "!!help":
             await message.channel.send("ヘルプ: !!help")
-        elif (
-                "ohayo" in message.content.lower()
-                or "oyasumi" in message.content.lower()
-                or "geosta" in message.content.lower()
-                or "努力 未来 a geoffroyi star" in message.content.lower()
-        ):
+
+        if "ohayo" in message.content.lower():
+            await message.add_reaction("\N{Black Heart}")
+        if "oyasumi" in message.content.lower():
+            await message.add_reaction("<:emoji_2:1074290659135066163>")
+        if "geosta" in message.content.lower() or "努力 未来 a geoffroyi star" in message.content.lower():
+            await message.add_reaction("\N{Black Heart}")
+        if "充 電 し な き ゃ 　敵 の 命 で ね" in message.content.lower():
             await message.add_reaction("\N{Black Heart}")
 
 
@@ -58,7 +61,9 @@ async def loop():
     elif (now.hour, now.minute) == (13, 0):
         await client.get_channel(main_channel_id).send("oyasumi")
     elif (now.hour, now.minute) == (15, 0):
-        await client.get_channel(main_channel_id).send("geosta")
+        await client.get_channel(main_channel_id).send(
+            "geosta" if random.random() <= 0.9 else "努力 未来 a geoffroyi star"
+        )
 
 
 client = Pengan()
