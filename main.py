@@ -44,7 +44,7 @@ async def loop() -> None:
             "geosta" if random.random() < 0.9 else "努力 未来 a geoffroyi star"
         )
     if now.minute % 2 == 0:
-        print(await client.check_radio_answers())
+        print(client.check_radio_answers())
 
 
 class Pengan(discord.Client):
@@ -53,7 +53,7 @@ class Pengan(discord.Client):
     def __init__(self):
         super().__init__(intents=intents)
 
-        self.radio_answers_count = len(await radio.get_answers(SPREADSHEET_ID, SHEET_CREDS))
+        self.radio_answers_count = len(radio.get_answers(SPREADSHEET_ID, SHEET_CREDS))
 
     async def on_ready(self) -> None:
         print(f"We have logged in as {self.user}")
@@ -84,8 +84,8 @@ On {message.channel}, {message.channel.guild} ({message.channel.id})
         if "充 電 し な き ゃ 　敵 の 命 で ね" in message.content.lower():
             await message.add_reaction("\U0001f5a4")
 
-    async def check_radio_answers(self) -> list[list[str]]:
-        answers = await radio.get_answers(SPREADSHEET_ID, SHEET_CREDS)
+    def check_radio_answers(self) -> list[list[str]]:
+        answers = radio.get_answers(SPREADSHEET_ID, SHEET_CREDS)
         radio_answers_count = len(answers)
         if 0 < (diff := radio_answers_count - self.radio_answers_count):
             self.radio_answers_count = radio_answers_count

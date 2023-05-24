@@ -6,7 +6,7 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
 
-async def get_answers(spreadsheet_id: str, sheet_creds_dict: dict[str, str]) -> list[list[str]]:
+def get_answers(spreadsheet_id: str, sheet_creds_dict: dict[str, str]) -> list[list[str]]:
     sheet_creds = Credentials.from_authorized_user_info(
         sheet_creds_dict,
         ["https://www.googleapis.com/auth/spreadsheets.readonly"]
