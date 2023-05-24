@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6cb57b35-1818-4ffa-a53e-025e9216670d" name="Changes" comment="print">
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-    </list>
+    <list default="true" id="6cb57b35-1818-4ffa-a53e-025e9216670d" name="Changes" comment="modules" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -95,7 +93,21 @@
       <option name="project" value="LOCAL" />
       <updated>1684931592733</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="print">
+      <created>1684931665452</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1684931665452</updated>
+    </task>
+    <task id="LOCAL-00010" summary="modules">
+      <created>1684931961415</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1684931961415</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -116,6 +128,7 @@
     <MESSAGE value="channel" />
     <MESSAGE value="workspace.xml" />
     <MESSAGE value="print" />
-    <option name="LAST_COMMIT_MESSAGE" value="print" />
+    <MESSAGE value="modules" />
+    <option name="LAST_COMMIT_MESSAGE" value="modules" />
   </component>
 </project>
