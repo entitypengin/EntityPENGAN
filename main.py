@@ -67,7 +67,8 @@ class Pengan(discord.Client):
         self.radio_answers_count = len(radio.get_answers(SPREADSHEET_ID, SHEET_CREDS))
 
     async def on_ready(self) -> None:
-        print(f"We have logged in as {self.user}")
+        print(f"""We have logged in as {self.user}
+""")
         await self.change_presence(activity=discord.Game(name="!!help", type=1))
         await self.get_channel(BOT_CHANNEL_ID).send(f"We have logged in as {self.user}")
 
@@ -78,9 +79,9 @@ class Pengan(discord.Client):
         loop.start()
 
     async def on_message(self, message: discord.Message) -> None:
-        print(f"""
-On {message.channel}, {message.channel.guild} ({message.channel.id})
-{message.author}: {message.content}""")
+        print(f"""On {message.channel}, {message.channel.guild} ({message.channel.id})
+{message.author}: {message.content}
+""")
         if message.author == self.user:
             return
         if message.content == "!!help":
