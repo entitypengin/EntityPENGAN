@@ -3,7 +3,7 @@
 
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
-from googleapiclient.errors import HttpError
+from googleapiclient.errors import HttpError, UnknownApiNameOrVersion
 
 
 def get_answers(spreadsheet_id: str, sheet_creds_dict: dict[str, str]) -> list[list[str]]:
@@ -15,7 +15,7 @@ def get_answers(spreadsheet_id: str, sheet_creds_dict: dict[str, str]) -> list[l
     try:
         try:
             service = build("sheets", "v4", credentials=sheet_creds)
-        except:
+        except UnknownApiNameOrVersion:
             service = build(
                 "sheets",
                 "v4",
