@@ -13,7 +13,15 @@ def get_answers(spreadsheet_id: str, sheet_creds_dict: dict[str, str]) -> list[l
     )
 
     try:
-        service = build("sheets", "v4", credentials=sheet_creds)
+        try:
+            service = build("sheets", "v4", credentials=sheet_creds)
+        except:
+            service = build(
+                "sheets",
+                "v4",
+                credentials=sheet_creds,
+                discoveryServiceUrl="https://sheets.googleapis.com/$discovery/rest?version=v4"
+            )
 
         sheet = service.spreadsheets()
         result = sheet.values().get(spreadsheetId=spreadsheet_id, range="A2:F").execute()
