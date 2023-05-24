@@ -14,6 +14,7 @@ from server import keep_alive
 
 DISCORD_TOKEN = os.environ["DISCORD_TOKEN"]
 MAIN_CHANNEL_ID = int(os.environ["MAIN_CHANNEL_ID"])
+RADIO_ANSWERS_CHANNEL_ID = int(os.environ["RADIO_ANSWERS_CHANNEL_ID"])
 BOT_CHANNEL_ID = int(os.environ["BOT_CHANNEL_ID"])
 SPREADSHEET_ID = os.environ["SPREADSHEET_ID"]
 
@@ -46,7 +47,15 @@ async def loop() -> None:
         )
 
     if now.minute % 2 == 0:
-        print(client.check_radio_answers())
+        answers = client.check_radio_answers()
+        for answer in answers:
+            await client.get_channel(RADIO_ANSWERS_CHANNEL_ID).send(f"""{answer[0]}
+ラジオネーム: {answer[1]}
+性別: {answer[2]}
+年代: {answer[3]}
+地域: {answer[4]}
+
+{answer[5]}""")
 
 
 class Pengan(discord.Client):
@@ -96,7 +105,6 @@ On {message.channel}, {message.channel.guild} ({message.channel.id})
 
 
 client = Pengan()
-
 
 keep_alive()
 
