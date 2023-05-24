@@ -6,7 +6,6 @@ import os
 import random
 
 import discord
-import discord.app_commands
 from discord.ext import tasks
 
 import radio
