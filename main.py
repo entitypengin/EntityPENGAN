@@ -9,14 +9,15 @@ import discord
 import discord.app_commands
 from discord.ext import tasks
 
-import radio
+# import radio
 from server import keep_alive
 
 DISCORD_TOKEN = os.environ["DISCORD_TOKEN"]
 MAIN_CHANNEL_ID = int(os.environ["MAIN_CHANNEL_ID"])
 BOT_CHANNEL_ID = int(os.environ["BOT_CHANNEL_ID"])
-SPREADSHEET_ID = os.environ["SPREADSHEET_ID"]
+# SPREADSHEET_ID = os.environ["SPREADSHEET_ID"]
 
+"""
 SHEET_CREDS = {
     "token": os.environ["SHEET_CREDS_TOKEN"],
     "refresh_token": os.environ["SHEET_CREDS_REFRESH_TOKEN"],
@@ -26,6 +27,7 @@ SHEET_CREDS = {
     "scopes": ["https://www.googleapis.com/auth/spreadsheets.readonly"],
     "expiry": "2023-05-24T08:48:49.831711Z"
 }
+"""
 
 
 intents = discord.Intents.default()
@@ -43,17 +45,19 @@ async def loop() -> None:
         await client.get_channel(MAIN_CHANNEL_ID).send(
             "geosta" if random.random() < 0.9 else "努力 未来 a geoffroyi star"
         )
+    """
     if now.minute % 2 == 0:
         print(client.check_radio_answers())
+    """
 
 
 class Pengan(discord.Client):
-    radio_answers_count: int
+    # radio_answers_count: int
 
     def __init__(self):
         super().__init__(intents=intents)
 
-        self.radio_answers_count = len(radio.get_answers(SPREADSHEET_ID, SHEET_CREDS))
+        # self.radio_answers_count = len(radio.get_answers(SPREADSHEET_ID, SHEET_CREDS))
 
     async def on_ready(self) -> None:
         print(f"We have logged in as {self.user}")
@@ -84,6 +88,7 @@ On {message.channel}, {message.channel.guild} ({message.channel.id})
         if "充 電 し な き ゃ 　敵 の 命 で ね" in message.content.lower():
             await message.add_reaction("\U0001f5a4")
 
+    """
     def check_radio_answers(self) -> list[list[str]]:
         answers = radio.get_answers(SPREADSHEET_ID, SHEET_CREDS)
         radio_answers_count = len(answers)
@@ -91,6 +96,7 @@ On {message.channel}, {message.channel.guild} ({message.channel.id})
             self.radio_answers_count = radio_answers_count
             return answers[-diff:]
         return []
+    """
 
 
 client = Pengan()
