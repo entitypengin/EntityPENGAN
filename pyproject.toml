@@ -8,6 +8,8 @@ authors = ["Replit user <<>>"]
 python = "^3.10"
 discord = "^2.2.2"
 Flask = "^2.2.3"
+google-api-python-client = "^2.86.0"
+xds-protos = "^0.0.11"
 
 [tool.poetry.dev-dependencies]
 
