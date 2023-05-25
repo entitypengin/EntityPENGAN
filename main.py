@@ -33,32 +33,6 @@ intents = discord.Intents.default()
 intents.message_content = True
 
 
-@tasks.loop(seconds=60)
-async def loop() -> None:
-    now = datetime.datetime.now()
-    if (now.hour, now.minute) == (13, 0):
-        await client.get_channel(MAIN_CHANNEL_ID).send("oyasumi")
-    elif (now.hour, now.minute) == (15, 0):
-        await client.get_channel(MAIN_CHANNEL_ID).send(
-            "geosta" if random.random() < 0.9 else "努力 未来 a geoffroyi star"
-        )
-    elif (now.hour, now.minute) == (22, 0):
-        await client.get_channel(MAIN_CHANNEL_ID).send("ohayo")
-
-    await client.update_presence()
-
-    if now.minute % 2 == 0:
-        answers = client.check_radio_answers()
-        for answer in answers:
-            await client.get_channel(RADIO_ANSWERS_CHANNEL_ID).send(f"""{answer[0]}
-ラジオネーム: {answer[1]}
-性別: {answer[2]}
-年代: {answer[3]}
-地域: {answer[4]}
-
-{answer[5]}""")
-
-
 class Pengan(discord.Client):
     radio_answers_count: int
 
@@ -76,7 +50,7 @@ class Pengan(discord.Client):
         #     print(message.content)
         # await client.get_channel().send()
 
-        loop.start()
+        loop.start(client)
 
     async def on_message(self, message: discord.Message) -> None:
         print(f"""On {message.channel}, {message.channel.guild} ({message.channel.id})
@@ -112,6 +86,32 @@ class Pengan(discord.Client):
             self.radio_answers_count = radio_answers_count
             return answers[-diff:]
         return []
+
+
+@tasks.loop(seconds=60)
+async def loop(pengan: Pengan) -> None:
+    now = datetime.datetime.now()
+    if (now.hour, now.minute) == (13, 0):
+        await pengan.get_channel(MAIN_CHANNEL_ID).send("oyasumi")
+    elif (now.hour, now.minute) == (15, 0):
+        await pengan.get_channel(MAIN_CHANNEL_ID).send(
+            "geosta" if random.random() < 0.9 else "努力 未来 a geoffroyi star"
+        )
+    elif (now.hour, now.minute) == (22, 0):
+        await pengan.get_channel(MAIN_CHANNEL_ID).send("ohayo")
+
+    await pengan.update_presence()
+
+    if now.minute % 2 == 0:
+        answers = pengan.check_radio_answers()
+        for answer in answers:
+            await pengan.get_channel(RADIO_ANSWERS_CHANNEL_ID).send(f"""{answer[0]}
+ラジオネーム: {answer[1]}
+性別: {answer[2]}
+年代: {answer[3]}
+地域: {answer[4]}
+
+{answer[5]}""")
 
 
 client = Pengan()
