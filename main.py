@@ -45,7 +45,7 @@ async def loop() -> None:
     elif (now.hour, now.minute) == (22, 0):
         await client.get_channel(MAIN_CHANNEL_ID).send("ohayo")
 
-    client.update_presence()
+    await client.update_presence()
 
     if now.minute % 2 == 0:
         answers = client.check_radio_answers()
@@ -96,7 +96,7 @@ class Pengan(discord.Client):
         if "充 電 し な き ゃ 　敵 の 命 で ね" in message.content.lower():
             await message.add_reaction("\U0001f5a4")
 
-    def update_presence(self) -> None:
+    async def update_presence(self) -> None:
         now = datetime.datetime.now()
         if now.hour < 13 or 22 <= now.hour:
             await self.change_presence(status=discord.Status.online, activity=discord.Game(name="!!help", type=1))
