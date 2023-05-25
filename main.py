@@ -36,14 +36,16 @@ intents.message_content = True
 @tasks.loop(seconds=60)
 async def loop() -> None:
     now = datetime.datetime.now()
-    if (now.hour, now.minute) == (22, 0):
-        await client.get_channel(MAIN_CHANNEL_ID).send("ohayo")
-    elif (now.hour, now.minute) == (13, 0):
+    if (now.hour, now.minute) == (13, 0):
         await client.get_channel(MAIN_CHANNEL_ID).send("oyasumi")
     elif (now.hour, now.minute) == (15, 0):
         await client.get_channel(MAIN_CHANNEL_ID).send(
             "geosta" if random.random() < 0.9 else "努力 未来 a geoffroyi star"
         )
+    elif (now.hour, now.minute) == (22, 0):
+        await client.get_channel(MAIN_CHANNEL_ID).send("ohayo")
+
+    client.update_presence()
 
     if now.minute % 2 == 0:
         answers = client.check_radio_answers()
@@ -68,7 +70,6 @@ class Pengan(discord.Client):
     async def on_ready(self) -> None:
         print(f"""We have logged in as {self.user}
 """)
-        await self.change_presence(activity=discord.Game(name="!!help", type=1))
         await self.get_channel(BOT_CHANNEL_ID).send(f"We have logged in as {self.user}")
 
         # async for message in client.get_channel().history(limit=20):
@@ -94,6 +95,15 @@ class Pengan(discord.Client):
             await message.add_reaction("<:PENGIN_LV98:1097096256939114517>")
         if "充 電 し な き ゃ 　敵 の 命 で ね" in message.content.lower():
             await message.add_reaction("\U0001f5a4")
+
+    def update_presence(self) -> None:
+        now = datetime.datetime.now()
+        if now.hour < 13 or 22 <= now.hour:
+            await self.change_presence(status=discord.Status.online, activity=discord.Game(name="!!help", type=1))
+        elif 13 <= now.hour < 15:
+            await self.change_presence(status=discord.Status.idle, activity=discord.Game(name="爆発中", type=1))
+        elif 15 <= now.hour < 22:
+            await self.change_presence(status=discord.Status.dnd, activity=discord.Game(name="努力中", type=1))
 
     def check_radio_answers(self) -> list[list[str]]:
         answers = radio.get_answers(SPREADSHEET_ID, SHEET_CREDS)
