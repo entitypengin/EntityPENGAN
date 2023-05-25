@@ -50,7 +50,7 @@ class Pengan(discord.Client):
         #     print(message.content)
         # await client.get_channel().send()
 
-        loop.start(client)
+        loop.start(self)
 
     async def on_message(self, message: discord.Message) -> None:
         print(f"""On {message.channel}, {message.channel.guild} ({message.channel.id})
