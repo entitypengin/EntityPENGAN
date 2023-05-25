@@ -75,9 +75,9 @@ class Pengan(discord.Client):
         if now.hour < 13 or 22 <= now.hour:
             await self.change_presence(status=discord.Status.online, activity=discord.Game(name="!!help", type=1))
         elif 13 <= now.hour < 15:
-            await self.change_presence(status=discord.Status.idle, activity=discord.Game(name="爆発中", type=1))
+            await self.change_presence(status=discord.Status.idle, activity=discord.Game(name="爆発", type=1))
         elif 15 <= now.hour < 22:
-            await self.change_presence(status=discord.Status.dnd, activity=discord.Game(name="努力中", type=1))
+            await self.change_presence(status=discord.Status.dnd, activity=discord.Game(name="努力", type=1))
 
     def check_radio_answers(self) -> list[list[str]]:
         answers = radio.get_answers(SPREADSHEET_ID, SHEET_CREDS)
