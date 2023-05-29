@@ -56,13 +56,11 @@ class Pengan(discord.Client):
         loop.start()
 
     async def on_member_join(self, member: discord.Member) -> None:
-        print("joined")
-        await member.guild.system_channel.send(f"""{member.name}がやってきました！
+        await member.guild.system_channel.send(f"""{member.mention}がやってきました！
 現在のメンバーは{member.guild.member_count}人です""")
 
     async def on_member_remove(self, member: discord.Member) -> None:
-        print("removed")
-        await member.guild.system_channel.send(f"""{member.name}が退出しました
+        await member.guild.system_channel.send(f"""{member.mention}が退出しました
 現在のメンバーは{member.guild.member_count}人です""")
 
     async def on_message(self, message: discord.Message) -> None:
@@ -160,8 +158,9 @@ async def loop() -> None:
 
     if now.minute % 2 == 0:
         answers = client.check_radio_answers()
-        for answer in answers:
-            await client.radio_answers_channel.send(f"""{answer[0]}
+        async with client.radio_answers_channel.typing():
+            for answer in answers:
+                await client.radio_answers_channel.send(f"""{answer[0]}
 ラジオネーム: {answer[1]}
 性別: {answer[2]}
 年代: {answer[3]}
