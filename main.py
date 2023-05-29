@@ -55,7 +55,7 @@ class Pengan(discord.Client):
         # async for message in client.get_channel().history(limit=20):
         #     print(message.content)
         # await client.get_channel().send()
-        self.main_channel.guild.get_member(self.user.id).nick = None
+        # await self.main_channel.guild.get_member(self.user.id).edit(nick=None)
 
         loop.start()
 
