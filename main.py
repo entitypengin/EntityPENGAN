@@ -36,7 +36,8 @@ intents.message_content = True
 class Pengan(discord.Client):
     radio_answers_count: int
 
-    status: int = 0
+    last_status: int = -1
+    status: int = -1
 
     OHAYO = 0
     OYASUMI = 1
@@ -80,6 +81,8 @@ class Pengan(discord.Client):
             await message.add_reaction("\U0001f5a4")
 
     async def update_presence(self) -> None:
+        self.last_status = self.status
+
         now = datetime.datetime.now()
         if 13 <= now.hour < 15:
             if self.status != self.CHARGE:
@@ -88,6 +91,16 @@ class Pengan(discord.Client):
             self.status = self.GEOSTA
         else:
             self.status = self.OHAYO
+
+        if self.last_status != -1 and self.last_status != self.status:
+            if self.status == self.OHAYO:
+                await client.get_channel(MAIN_CHANNEL_ID).send("ohayo")
+            elif self.status == self.OYASUMI:
+                await client.get_channel(MAIN_CHANNEL_ID).send("oyasumi")
+            elif self.status == self.GEOSTA:
+                await client.get_channel(MAIN_CHANNEL_ID).send(
+                    "geosta" if random.random() < 0.9 else "努力 未来 a geoffroyi star"
+                )
 
         if self.status == self.OHAYO:
             await client.change_presence(
@@ -118,15 +131,6 @@ class Pengan(discord.Client):
 @tasks.loop(seconds=60)
 async def loop() -> None:
     now = datetime.datetime.now()
-
-    if (now.hour, now.minute) == (13, 0):
-        await client.get_channel(MAIN_CHANNEL_ID).send("oyasumi")
-    elif (now.hour, now.minute) == (15, 0):
-        await client.get_channel(MAIN_CHANNEL_ID).send(
-            "geosta" if random.random() < 0.9 else "努力 未来 a geoffroyi star"
-        )
-    elif (now.hour, now.minute) == (22, 0):
-        await client.get_channel(MAIN_CHANNEL_ID).send("ohayo")
 
     await client.update_presence()
 
