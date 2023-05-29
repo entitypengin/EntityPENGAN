@@ -36,10 +36,26 @@ intents.message_content = True
 class Pengan(discord.Client):
     radio_answers_count: int
 
+    _status: int = 0
+
     def __init__(self):
         super().__init__(intents=intents)
 
         self.radio_answers_count = len(radio.get_answers(SPREADSHEET_ID, SHEET_CREDS))
+
+    @property
+    def status(self) -> int:
+        return self._status
+
+    @status.setter
+    def status(self, value: int):
+        self._status = value
+        if self._status == 0:
+            await self.change_presence(status=discord.Status.online, activity=discord.Game(name="!!help", type=1))
+        elif self._status == 1:
+            await self.change_presence(status=discord.Status.idle, activity=discord.Game(name="爆発", type=1))
+        elif self._status == 2:
+            await self.change_presence(status=discord.Status.dnd, activity=discord.Game(name="努力", type=1))
 
     async def on_ready(self) -> None:
         print(f"""We have logged in as {self.user}
@@ -73,11 +89,11 @@ class Pengan(discord.Client):
     async def update_presence(self) -> None:
         now = datetime.datetime.now()
         if now.hour < 13 or 22 <= now.hour:
-            await self.change_presence(status=discord.Status.online, activity=discord.Game(name="!!help", type=1))
+            self.status = 0
         elif 13 <= now.hour < 15:
-            await self.change_presence(status=discord.Status.idle, activity=discord.Game(name="爆発", type=1))
+            self.status = 1
         elif 15 <= now.hour < 22:
-            await self.change_presence(status=discord.Status.dnd, activity=discord.Game(name="努力", type=1))
+            self.status = 2
 
     def check_radio_answers(self) -> list[list[str]]:
         answers = radio.get_answers(SPREADSHEET_ID, SHEET_CREDS)
