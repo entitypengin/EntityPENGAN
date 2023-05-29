@@ -7,7 +7,19 @@ import random
 import discord
 from discord.ext import tasks
 
-from constants import *
+from constants import (
+    BOT_CHANNEL_ID,
+    CHARGE,
+    DISCORD_TOKEN,
+    EXCEPTION,
+    GEOSTA,
+    MAIN_CHANNEL_ID,
+    OHAYO,
+    OYASUMI,
+    RADIO_ANSWERS_CHANNEL_ID,
+    SHEET_CREDS,
+    SPREADSHEET_ID,
+)
 import radio
 from server import keep_alive
 
