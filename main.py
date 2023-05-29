@@ -43,11 +43,11 @@ class Pengan(discord.Client):
 
         self.radio_answers_count = len(radio.get_answers(SPREADSHEET_ID, SHEET_CREDS))
 
+    async def on_ready(self) -> None:
         self.main_channel = self.get_channel(MAIN_CHANNEL_ID)
         self.radio_answers_channel = self.get_channel(RADIO_ANSWERS_CHANNEL_ID)
         self.bot_channel = self.get_channel(BOT_CHANNEL_ID)
 
-    async def on_ready(self) -> None:
         print(f"""We have logged in as {self.user}
 """)
         await self.bot_channel.send(f"We have logged in as {self.user}")
