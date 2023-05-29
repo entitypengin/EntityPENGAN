@@ -83,15 +83,15 @@ class Pengan(discord.Client):
 
         if self.status == 0:
             await client.change_presence(
-                status=discord.Status.online, activity=discord.Game(name="!!help<:emoji_2:1074290659135066163>", type=1)
+                status=discord.Status.online, activity=discord.Game(name="!!help", type=1)
             )
         elif self.status == 1:
             await client.change_presence(
-                status=discord.Status.idle, activity=discord.Game(name="爆発<:emoji_2:1074290659135066163>", type=1)
+                status=discord.Status.idle, activity=discord.Game(name="爆発", type=1)
             )
         elif self.status == 2:
             await client.change_presence(
-                status=discord.Status.dnd, activity=discord.Game(name="努力<:PENGIN_LV98:1097096256939114517>", type=1)
+                status=discord.Status.dnd, activity=discord.Game(name="努力", type=1)
             )
 
     def check_radio_answers(self) -> list[list[str]]:
