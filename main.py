@@ -68,6 +68,16 @@ class Pengan(discord.Client):
             return
         if message.content == "!!help":
             await message.channel.send("ヘルプ: !!help")
+        if message.content.startswith("!!debug"):
+            arg = message.content.strip()[1]
+            if arg == "ohayo":
+                self.status = self.OHAYO
+            elif arg == "oyasumi":
+                self.status = self.OYASUMI
+            elif arg == "charge":
+                self.status = self.CHARGE
+            elif arg == "geosta":
+                self.status = self.GEOSTA
 
         if "ohayo" in message.content.lower():
             await message.add_reaction("\U0001f5a4")
