@@ -38,6 +38,11 @@ class Pengan(discord.Client):
 
     status: int = 0
 
+    OHAYO = 0
+    OYASUMI = 1
+    CHARGE = 2
+    GEOSTA = 3
+
     def __init__(self):
         super().__init__(intents=intents)
 
@@ -70,26 +75,33 @@ class Pengan(discord.Client):
         if "geosta" in message.content.lower() or "努力 未来 a geoffroyi star" in message.content.lower():
             await message.add_reaction("<:PENGIN_LV98:1097096256939114517>")
         if "充 電 し な き ゃ 　敵 の 命 で ね" in message.content.lower():
+            if self.status == self.OYASUMI:
+                self.status = self.CHARGE
             await message.add_reaction("\U0001f5a4")
 
     async def update_presence(self) -> None:
         now = datetime.datetime.now()
-        if now.hour < 13 or 22 <= now.hour:
-            self.status = 0
-        elif 13 <= now.hour < 15:
-            self.status = 1
+        if 13 <= now.hour < 15:
+            if self.status != self.CHARGE:
+                self.status = self.OYASUMI
         elif 15 <= now.hour < 22:
-            self.status = 2
+            self.status = self.GEOSTA
+        else:
+            self.status = self.OHAYO
 
-        if self.status == 0:
+        if self.status == self.OHAYO:
             await client.change_presence(
                 status=discord.Status.online, activity=discord.Game(name="!!help", type=1)
             )
-        elif self.status == 1:
+        elif self.status == self.OYASUMI:
             await client.change_presence(
                 status=discord.Status.idle, activity=discord.Game(name="爆発", type=1)
             )
-        elif self.status == 2:
+        elif self.status == self.CHARGE:
+            await client.change_presence(
+                status=discord.Status.dnd, activity=discord.Game(name="充電", type=1)
+            )
+        elif self.status == self.GEOSTA:
             await client.change_presence(
                 status=discord.Status.dnd, activity=discord.Game(name="努力", type=1)
             )
