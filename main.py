@@ -72,15 +72,19 @@ class Pengan(discord.Client):
             arg = message.content.split()[1]
             if arg == "ohayo":
                 self.status = self.OHAYO
+                await self.update_presence()
                 await message.channel.send("OK")
             elif arg == "oyasumi":
                 self.status = self.OYASUMI
+                await self.update_presence()
                 await message.channel.send("OK")
             elif arg == "charge":
                 self.status = self.CHARGE
+                await self.update_presence()
                 await message.channel.send("OK")
             elif arg == "geosta":
                 self.status = self.GEOSTA
+                await self.update_presence()
                 await message.channel.send("OK")
 
         if "ohayo" in message.content.lower():
