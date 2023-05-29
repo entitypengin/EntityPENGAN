@@ -82,7 +82,9 @@ class Pengan(discord.Client):
             self.status = 2
 
         if self.status == 0:
-            await client.change_presence(status=discord.Status.online, activity=discord.Game(name="!!help", type=1))
+            await client.change_presence(
+                status=discord.Status.online, activity=discord.Game(name="!!help<:emoji_2:1074290659135066163>", type=1)
+            )
         elif self.status == 1:
             await client.change_presence(
                 status=discord.Status.idle, activity=discord.Game(name="爆発<:emoji_2:1074290659135066163>", type=1)
