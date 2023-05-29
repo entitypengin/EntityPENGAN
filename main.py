@@ -69,7 +69,7 @@ class Pengan(discord.Client):
         if message.content == "!!help":
             await message.channel.send("ヘルプ: !!help")
         if message.content.startswith("!!debug"):
-            arg = message.content.strip()[1]
+            arg = message.content.split()[1]
             if arg == "ohayo":
                 self.status = self.OHAYO
                 await message.channel.send("OK")
