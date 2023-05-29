@@ -55,10 +55,12 @@ class Pengan(discord.Client):
         loop.start()
 
     async def on_member_join(self, member: discord.Member) -> None:
+        print("joined")
         await member.guild.system_channel.send(f"""{member.name}がやってきました！
 現在のメンバーは{member.guild.member_count}人です""")
 
     async def on_member_remove(self, member: discord.Member) -> None:
+        print("removed")
         await member.guild.system_channel.send(f"""{member.name}が退出しました
 現在のメンバーは{member.guild.member_count}人です""")
 
