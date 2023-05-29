@@ -1,24 +1,26 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-
+from enum import Enum
 import os
 
 
-OHAYO = 0
-OYASUMI = 1
-CHARGE = 2
-GEOSTA = 3
-EXCEPTION = -1
+class Status(Enum):
+    OHAYO = 0
+    OYASUMI = 1
+    CHARGE = 2
+    GEOSTA = 3
+    EXCEPTION = -1
+
+
+class Channels:
+    MAIN_CHANNEL_ID = int(os.environ["MAIN_CHANNEL_ID"])
+    RADIO_ANSWERS_CHANNEL_ID = int(os.environ["RADIO_ANSWERS_CHANNEL_ID"])
+    BOT_CHANNEL_ID = int(os.environ["BOT_CHANNEL_ID"])
 
 
 DISCORD_TOKEN = os.environ["DISCORD_TOKEN"]
-MAIN_CHANNEL_ID = int(os.environ["MAIN_CHANNEL_ID"])
-RADIO_ANSWERS_CHANNEL_ID = int(os.environ["RADIO_ANSWERS_CHANNEL_ID"])
-BOT_CHANNEL_ID = int(os.environ["BOT_CHANNEL_ID"])
 SPREADSHEET_ID = os.environ["SPREADSHEET_ID"]
-
-
 SHEET_CREDS = {
     "token": os.environ["SHEET_CREDS_TOKEN"],
     "refresh_token": os.environ["SHEET_CREDS_REFRESH_TOKEN"],

@@ -8,17 +8,11 @@ import discord
 from discord.ext import tasks
 
 from constants import (
-    BOT_CHANNEL_ID,
-    CHARGE,
+    Channels,
     DISCORD_TOKEN,
-    EXCEPTION,
-    GEOSTA,
-    MAIN_CHANNEL_ID,
-    OHAYO,
-    OYASUMI,
-    RADIO_ANSWERS_CHANNEL_ID,
     SHEET_CREDS,
     SPREADSHEET_ID,
+    Status,
 )
 import radio
 from server import keep_alive
@@ -31,10 +25,11 @@ intents.message_content = True
 class Pengan(discord.Client):
     radio_answers_count: int
 
-    last_status: int = EXCEPTION
-    status: int = EXCEPTION
+    last_status: Status = Status.EXCEPTION
+    status: Status = Status.EXCEPTION
 
     main_channel: discord.TextChannel
+    welcome_channel: discord.TextChannel
     radio_answers_channel: discord.TextChannel
     bot_channel: discord.TextChannel
 
@@ -44,9 +39,9 @@ class Pengan(discord.Client):
         self.radio_answers_count = len(radio.get_answers(SPREADSHEET_ID, SHEET_CREDS))
 
     async def on_ready(self) -> None:
-        self.main_channel = self.get_channel(MAIN_CHANNEL_ID)
-        self.radio_answers_channel = self.get_channel(RADIO_ANSWERS_CHANNEL_ID)
-        self.bot_channel = self.get_channel(BOT_CHANNEL_ID)
+        self.main_channel = self.get_channel(Channels.MAIN_CHANNEL_ID)
+        self.radio_answers_channel = self.get_channel(Channels.RADIO_ANSWERS_CHANNEL_ID)
+        self.bot_channel = self.get_channel(Channels.BOT_CHANNEL_ID)
 
         print(f"""We have logged in as {self.user}
 """)
@@ -59,6 +54,14 @@ class Pengan(discord.Client):
 
         loop.start()
 
+    async def on_member_join(self, member: discord.Member) -> None:
+        await member.guild.system_channel.send(f"""{member.name}がやってきました！
+現在のメンバーは{member.guild.member_count}人です""")
+
+    async def on_member_remove(self, member: discord.Member) -> None:
+        await member.guild.system_channel.send(f"""{member.name}が退出しました
+現在のメンバーは{member.guild.member_count}人です""")
+
     async def on_message(self, message: discord.Message) -> None:
         print(f"""On {message.channel}, {message.channel.guild} ({message.channel.id})
 {message.author}: {message.content}
@@ -70,19 +73,19 @@ class Pengan(discord.Client):
         if message.content.startswith("!!debug"):
             arg = message.content.split()[1]
             if arg == "ohayo":
-                self.status = OHAYO
+                self.status = Status.OHAYO
                 await self.update_presence()
                 await message.channel.send("OK")
             elif arg == "oyasumi":
-                self.status = OYASUMI
+                self.status = Status.OYASUMI
                 await self.update_presence()
                 await message.channel.send("OK")
             elif arg == "charge":
-                self.status = CHARGE
+                self.status = Status.CHARGE
                 await self.update_presence()
                 await message.channel.send("OK")
             elif arg == "geosta":
-                self.status = GEOSTA
+                self.status = Status.GEOSTA
                 await self.update_presence()
                 await message.channel.send("OK")
 
@@ -93,45 +96,45 @@ class Pengan(discord.Client):
         if "geosta" in message.content.lower() or "努力 未来 a geoffroyi star" in message.content.lower():
             await message.add_reaction("<:PENGIN_LV98:1097096256939114517>")
         if "充 電 し な き ゃ 　敵 の 命 で ね" in message.content.lower():
-            if self.status == OYASUMI:
-                self.status = CHARGE
+            if self.status == Status.OYASUMI:
+                self.status = Status.CHARGE
             await message.add_reaction("\U0001f5a4")
 
     async def update_status(self) -> None:
         self.last_status = self.status
         now = datetime.datetime.now()
         if 13 <= now.hour < 15:
-            if self.status != CHARGE:
-                self.status = OYASUMI
+            if self.status != Status.CHARGE:
+                self.status = Status.OYASUMI
         elif 15 <= now.hour < 22:
-            self.status = GEOSTA
+            self.status = Status.GEOSTA
         else:
-            self.status = OHAYO
+            self.status = Status.OHAYO
 
-        if self.last_status != EXCEPTION and self.last_status != self.status:
-            if self.status == OHAYO:
+        if self.last_status != Status.EXCEPTION and self.last_status != self.status:
+            if self.status == Status.OHAYO:
                 await self.main_channel.send("ohayo")
-            elif self.status == OYASUMI:
+            elif self.status == Status.OYASUMI:
                 await self.main_channel.send("oyasumi")
-            elif self.status == GEOSTA:
+            elif self.status == Status.GEOSTA:
                 await self.main_channel.send(
                     "geosta" if random.random() < 0.9 else "努力 未来 a geoffroyi star"
                 )
 
     async def update_presence(self) -> None:
-        if self.status == OHAYO:
+        if self.status == Status.OHAYO:
             await client.change_presence(
                 status=discord.Status.online, activity=discord.Game(name="!!help", type=1)
             )
-        elif self.status == OYASUMI:
+        elif self.status == Status.OYASUMI:
             await client.change_presence(
                 status=discord.Status.idle, activity=discord.Game(name="爆発", type=1)
             )
-        elif self.status == CHARGE:
+        elif self.status == Status.CHARGE:
             await client.change_presence(
                 status=discord.Status.dnd, activity=discord.Game(name="充電", type=1)
             )
-        elif self.status == GEOSTA:
+        elif self.status == Status.GEOSTA:
             await client.change_presence(
                 status=discord.Status.dnd, activity=discord.Game(name="努力", type=1)
             )
