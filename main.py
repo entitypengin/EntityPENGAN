@@ -6,6 +6,7 @@ import random
 
 import discord
 from discord.ext import tasks
+from google.auth.exceptions import RefreshError
 
 from constants import (
     Channels,
@@ -26,7 +27,6 @@ intents.members = True
 class Pengan(discord.Client):
     radio_answers_count: int
 
-    last_status: Status = Status.EXCEPTION
     status: Status = Status.EXCEPTION
 
     main_channel: discord.TextChannel
@@ -102,7 +102,6 @@ class Pengan(discord.Client):
             await message.add_reaction("\U0001f5a4")
 
     async def update_status(self) -> None:
-        self.last_status = self.status
         now = datetime.datetime.now()
         if 13 <= now.hour < 15:
             if self.status != Status.CHARGE:
@@ -112,12 +111,12 @@ class Pengan(discord.Client):
         else:
             self.status = Status.OHAYO
 
-        if self.last_status != Status.EXCEPTION and self.last_status != self.status:
-            if self.status == Status.OHAYO:
+        if now.minute == 0:
+            if now.hour == 22:
                 await self.main_channel.send("ohayo")
-            elif self.status == Status.OYASUMI:
+            elif now.hour == 13:
                 await self.main_channel.send("oyasumi")
-            elif self.status == Status.GEOSTA:
+            elif now.hour == 15:
                 await self.main_channel.send(
                     "geosta" if random.random() < 0.9 else "努力 未来 a geoffroyi star"
                 )
@@ -157,16 +156,19 @@ async def loop() -> None:
     await client.update_presence()
 
     if now.minute % 2 == 0:
-        answers = client.check_radio_answers()
-        async with client.radio_answers_channel.typing():
-            for answer in answers:
-                await client.radio_answers_channel.send(f"""{answer[0]}
+        try:
+            answers = client.check_radio_answers()
+            async with client.radio_answers_channel.typing():
+                for answer in answers:
+                    await client.radio_answers_channel.send(f"""{answer[0]}
 ラジオネーム: {answer[1]}
 性別: {answer[2]}
 年代: {answer[3]}
 地域: {answer[4]}
 
 {answer[5]}""")
+        except RefreshError:
+            pass
 
 
 client = Pengan()
