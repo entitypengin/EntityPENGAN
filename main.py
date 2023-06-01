@@ -6,7 +6,7 @@ import random
 
 import discord
 from discord.ext import tasks
-from google.auth.exceptions import RefreshError
+# from google.auth.exceptions import RefreshError
 
 from constants import (
     Channels,
@@ -15,7 +15,7 @@ from constants import (
     SPREADSHEET_ID,
     Status,
 )
-import radio
+# import radio
 from server import keep_alive
 
 
@@ -25,6 +25,7 @@ intents.members = True
 
 
 class Pengan(discord.Client):
+    last_answers_count: int
     radio_answers_count: int
 
     status: Status = Status.EXCEPTION
@@ -36,8 +37,6 @@ class Pengan(discord.Client):
 
     def __init__(self):
         super().__init__(intents=intents)
-
-        self.radio_answers_count = len(radio.get_answers(SPREADSHEET_ID, SHEET_CREDS))
 
     async def on_ready(self) -> None:
         self.main_channel = self.get_channel(Channels.MAIN_CHANNEL_ID)
@@ -139,13 +138,24 @@ class Pengan(discord.Client):
                 status=discord.Status.dnd, activity=discord.Game(name="努力", type=1)
             )
 
-    def check_radio_answers(self) -> list[list[str]]:
+
+'''    def check_radio_answers(self) -> None:
         answers = radio.get_answers(SPREADSHEET_ID, SHEET_CREDS)
-        radio_answers_count = len(answers)
+        self.last_answers_count = self.radio_answers_count
+        self.radio_answers_count = len(answers)
         if 0 < (diff := radio_answers_count - self.radio_answers_count):
             self.radio_answers_count = radio_answers_count
-            return answers[-diff:]
-        return []
+            new = answers[-diff:]
+            async with client.radio_answers_channel.typing():
+                for answer in new:
+                    await client.radio_answers_channel.send(f"""{answer[0]}
+ラジオネーム: {answer[1]}
+性別: {answer[2]}
+年代: {answer[3]}
+地域: {answer[4]}
+
+{answer[5]}""")
+'''
 
 
 @tasks.loop(seconds=60)
@@ -156,20 +166,11 @@ async def loop() -> None:
     await client.update_presence()
 
     if now.minute % 2 == 0:
-        try:
-            answers = client.check_radio_answers()
-            async with client.radio_answers_channel.typing():
-                for answer in answers:
-                    await client.radio_answers_channel.send(f"""{answer[0]}
-ラジオネーム: {answer[1]}
-性別: {answer[2]}
-年代: {answer[3]}
-地域: {answer[4]}
-
-{answer[5]}""")
-        except RefreshError:
-            pass
-
+        """        try:
+                    client.check_radio_answers()
+                except RefreshError:
+                    pass
+        """
 
 client = Pengan()
 
