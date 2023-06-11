@@ -49,7 +49,7 @@ class Pengan(discord.Client):
 
         # async for message in client.get_channel().history(limit=20):
         #     print(message.content)
-        # await client.get_channel().send()
+        # await self.main_channel.send("これ実は1/10の確率でgeosta全文言うようにしてるんだよね")
         # await self.main_channel.guild.get_member(self.user.id).edit(nick=None)
 
         loop.start()
