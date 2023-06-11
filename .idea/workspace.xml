@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6cb57b35-1818-4ffa-a53e-025e9216670d" name="Changes" comment="ecchi">
+    <list default="true" id="6cb57b35-1818-4ffa-a53e-025e9216670d" name="Changes" comment="somethiun">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,13 +46,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1684923141636</updated>
-    </task>
-    <task id="LOCAL-00003" summary="deleted venv">
-      <created>1684924005760</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1684924005760</updated>
     </task>
     <task id="LOCAL-00004" summary="something">
       <created>1684924053701</created>
@@ -389,7 +383,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686446788747</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="somethiun">
+      <created>1686447073884</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1686447073884</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -422,6 +423,7 @@
     <MESSAGE value="intentxz" />
     <MESSAGE value="error" />
     <MESSAGE value="ecchi" />
-    <option name="LAST_COMMIT_MESSAGE" value="ecchi" />
+    <MESSAGE value="somethiun" />
+    <option name="LAST_COMMIT_MESSAGE" value="somethiun" />
   </component>
 </project>
