@@ -96,9 +96,9 @@ class Pengan(discord.Client):
         if "geosta" in message.content.lower() or "努力 未来 a geoffroyi star" in message.content.lower():
             await message.add_reaction("<:PENGIN_LV98:1097096256939114517>")
         if (
-                "ecchi" in message.content.lower()
-                or "えっち" in message.content.lower()
-                or "エッチ" in message.content.lower()
+            "ecchi" in message.content.lower()
+            or "えっち" in message.content.lower()
+            or "エッチ" in message.content.lower()
         ):
             await message.add_reaction("<:otonadechi:1065560408934592582>")
         if "充 電 し な き ゃ 　敵 の 命 で ね" in message.content.lower():
@@ -166,17 +166,20 @@ class Pengan(discord.Client):
 
 @tasks.loop(seconds=60)
 async def loop() -> None:
-    now = datetime.datetime.now()
+    try:
+        now = datetime.datetime.now()
 
-    await client.update_status()
-    await client.update_presence()
+        await client.update_status()
+        await client.update_presence()
 
-    if now.minute % 2 == 0:
-        """        try:
-                    client.check_radio_answers()
-                except RefreshError:
-                    pass
-        """
+        if now.minute % 2 == 0:
+            """        try:
+                        client.check_radio_answers()
+                    except RefreshError:
+                        pass
+            """
+    except BaseException as e:
+        print(e)
 
 client = Pengan()
 
