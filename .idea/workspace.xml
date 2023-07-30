@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6cb57b35-1818-4ffa-a53e-025e9216670d" name="Changes" comment="somethiun">
+    <list default="true" id="6cb57b35-1818-4ffa-a53e-025e9216670d" name="Changes" comment="async">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,13 +45,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1684923141636</updated>
-    </task>
-    <task id="LOCAL-00009" summary="print">
-      <created>1684931665452</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1684931665452</updated>
     </task>
     <task id="LOCAL-00010" summary="modules">
       <created>1684931961415</created>
@@ -390,7 +382,14 @@
       <option name="project" value="LOCAL" />
       <updated>1689556029943</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="async">
+      <created>1690690361366</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1690690361367</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -424,6 +423,7 @@
     <MESSAGE value="error" />
     <MESSAGE value="ecchi" />
     <MESSAGE value="somethiun" />
-    <option name="LAST_COMMIT_MESSAGE" value="somethiun" />
+    <MESSAGE value="async" />
+    <option name="LAST_COMMIT_MESSAGE" value="async" />
   </component>
 </project>

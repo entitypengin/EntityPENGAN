@@ -3,7 +3,6 @@
 
 import datetime
 import random
-import time
 
 import discord
 from discord.ext import tasks
@@ -178,7 +177,7 @@ async def loop() -> None:
 
         print(now)
 
-        db["last_working"] = time.time()
+        db["last_working"] = now.timestamp()
 
         await client.update_status()
         await client.update_presence()
