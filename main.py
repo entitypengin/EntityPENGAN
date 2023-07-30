@@ -44,7 +44,10 @@ class Pengan(discord.Client):
         self.radio_answers_channel = self.get_channel(Channels.RADIO_ANSWERS_CHANNEL_ID)
         self.bot_channel = self.get_channel(Channels.BOT_CHANNEL_ID)
 
-        # last_working = db["last_working"]
+        last_working = datetime.datetime.fromtimestamp(db["last_working"], datetime.timezone.utc)
+
+        async for message in self.bot_channel.history(after=last_working):
+            await self.reaction(message)
 
         print(f"""We have logged in as {self.user}
 """)
@@ -173,7 +176,7 @@ class Pengan(discord.Client):
 @tasks.loop(seconds=60)
 async def loop() -> None:
     try:
-        now = datetime.datetime.now()
+        now = datetime.datetime.now(datetime.timezone.utc)
 
         print(now)
 

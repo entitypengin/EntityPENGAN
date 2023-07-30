@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6cb57b35-1818-4ffa-a53e-025e9216670d" name="Changes" comment="async">
+    <list default="true" id="6cb57b35-1818-4ffa-a53e-025e9216670d" name="Changes" comment="removed time">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,13 +46,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1684923141636</updated>
-    </task>
-    <task id="LOCAL-00010" summary="modules">
-      <created>1684931961415</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1684931961415</updated>
     </task>
     <task id="LOCAL-00011" summary="modules">
       <created>1684931994610</created>
@@ -389,7 +383,14 @@
       <option name="project" value="LOCAL" />
       <updated>1690690361367</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="removed time">
+      <created>1690690827456</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1690690827456</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -424,6 +425,7 @@
     <MESSAGE value="ecchi" />
     <MESSAGE value="somethiun" />
     <MESSAGE value="async" />
-    <option name="LAST_COMMIT_MESSAGE" value="async" />
+    <MESSAGE value="removed time" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed time" />
   </component>
 </project>
