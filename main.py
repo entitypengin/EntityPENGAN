@@ -46,8 +46,10 @@ class Pengan(discord.Client):
 
         last_working = datetime.datetime.fromtimestamp(db["last_working"], datetime.timezone.utc)
 
-        async for message in self.bot_channel.history(after=last_working):
-            await self.reaction(message)
+        for guild in self.guilds:
+            for channel in guild.channels:
+                async for message in channel.history(after=last_working):
+                    await self.reaction(message)
 
         print(f"""We have logged in as {self.user}
 """)
@@ -115,8 +117,7 @@ class Pengan(discord.Client):
                 self.status = Status.CHARGE
             await message.add_reaction("\U0001f5a4")
 
-    async def update_status(self) -> None:
-        now = datetime.datetime.now()
+    async def update_status(self, now) -> None:
         if 13 <= now.hour < 15:
             if self.status != Status.CHARGE:
                 self.status = Status.OYASUMI
@@ -182,7 +183,7 @@ async def loop() -> None:
 
         db["last_working"] = now.timestamp()
 
-        await client.update_status()
+        await client.update_status(now)
         await client.update_presence()
 
         if now.minute % 2 == 0:
