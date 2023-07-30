@@ -10,6 +10,7 @@ google-api-python-client = "^2.86.0"
 xds-protos = "^0.0.11"
 discord = "^2.2.3"
 Flask = "^2.3.2"
+replit = "^3.3.1"
 
 [tool.poetry.dev-dependencies]
 
