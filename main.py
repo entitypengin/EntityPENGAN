@@ -6,7 +6,7 @@ import random
 
 import discord
 from discord.ext import tasks
-# from google.auth.exceptions import RefreshError
+from google.auth.exceptions import RefreshError
 from replit import db
 
 from constants import (
@@ -16,7 +16,7 @@ from constants import (
     SPREADSHEET_ID,
     Status,
 )
-# import radio
+import radio
 from server import keep_alive
 
 
@@ -56,10 +56,10 @@ class Pengan(discord.Client):
 """)
         await self.bot_channel.send(f"We have logged in as {self.user}")
 
-        # async for message in client.get_channel().history(limit=20):
-        #     print(message.content)
-        # await self.main_channel.send("これ実は1/10の確率でgeosta全文言うようにしてるんだよね")
-        # await self.main_channel.guild.get_member(self.user.id).edit(nick=None)
+        async for message in client.get_channel().history(limit=20):
+            print(message.content)
+        await self.main_channel.send("これ実は1/10の確率でgeosta全文言うようにしてるんだよね")
+        await self.main_channel.guild.get_member(self.user.id).edit(nick=None)
 
         loop.start()
 
@@ -156,7 +156,7 @@ class Pengan(discord.Client):
             )
 
 
-'''    def check_radio_answers(self) -> None:
+    def check_radio_answers(self) -> None:
         answers = radio.get_answers(SPREADSHEET_ID, SHEET_CREDS)
         self.last_answers_count = self.radio_answers_count
         self.radio_answers_count = len(answers)
@@ -172,7 +172,6 @@ class Pengan(discord.Client):
 地域: {answer[4]}
 
 {answer[5]}""")
-'''
 
 
 @tasks.loop(seconds=60)
@@ -188,11 +187,11 @@ async def loop() -> None:
         await client.update_presence()
 
         if now.minute % 2 == 0:
-            """        try:
-                        client.check_radio_answers()
-                    except RefreshError:
-                        pass
-            """
+            try:
+                client.check_radio_answers()
+            except BaseException as e:
+                print(e)
+
     except BaseException as e:
         print(e)
 
