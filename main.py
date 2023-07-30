@@ -3,10 +3,12 @@
 
 import datetime
 import random
+import time
 
 import discord
 from discord.ext import tasks
 # from google.auth.exceptions import RefreshError
+from replit import db
 
 from constants import (
     Channels,
@@ -42,6 +44,8 @@ class Pengan(discord.Client):
         self.main_channel = self.get_channel(Channels.MAIN_CHANNEL_ID)
         self.radio_answers_channel = self.get_channel(Channels.RADIO_ANSWERS_CHANNEL_ID)
         self.bot_channel = self.get_channel(Channels.BOT_CHANNEL_ID)
+
+        # last_working = db["last_working"]
 
         print(f"""We have logged in as {self.user}
 """)
@@ -89,6 +93,9 @@ class Pengan(discord.Client):
                 await self.update_presence()
                 await message.channel.send("OK")
 
+        await self.reaction(message)
+
+    async def reaction(self, message: discord.Message):
         if "ohayo" in message.content.lower():
             await message.add_reaction("\U0001f5a4")
         if "oyasumi" in message.content.lower():
@@ -168,6 +175,10 @@ class Pengan(discord.Client):
 async def loop() -> None:
     try:
         now = datetime.datetime.now()
+
+        print(now)
+
+        db["last_working"] = time.time()
 
         await client.update_status()
         await client.update_presence()
