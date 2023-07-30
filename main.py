@@ -6,7 +6,6 @@ import random
 
 import discord
 from discord.ext import tasks
-from google.auth.exceptions import RefreshError
 from replit import db
 
 from constants import (
@@ -26,9 +25,6 @@ intents.members = True
 
 
 class Pengan(discord.Client):
-    last_answers_count: int
-    radio_answers_count: int
-
     status: Status = Status.EXCEPTION
 
     main_channel: discord.TextChannel
@@ -56,10 +52,11 @@ class Pengan(discord.Client):
 """)
         await self.bot_channel.send(f"We have logged in as {self.user}")
 
-        async for message in client.get_channel().history(limit=20):
+        """        async for message in client.get_channel().history(limit=20):
             print(message.content)
         await self.main_channel.send("これ実は1/10の確率でgeosta全文言うようにしてるんだよね")
         await self.main_channel.guild.get_member(self.user.id).edit(nick=None)
+        """
 
         loop.start()
 
@@ -155,17 +152,14 @@ class Pengan(discord.Client):
                 status=discord.Status.dnd, activity=discord.Game(name="努力", type=1)
             )
 
-
-    def check_radio_answers(self) -> None:
+    async def check_radio_answers(self) -> None:
         answers = radio.get_answers(SPREADSHEET_ID, SHEET_CREDS)
-        self.last_answers_count = self.radio_answers_count
-        self.radio_answers_count = len(answers)
-        if 0 < (diff := radio_answers_count - self.radio_answers_count):
-            self.radio_answers_count = radio_answers_count
+        radio_answers_count = len(answers)
+        if 0 < (diff := radio_answers_count - db["radio_answers_count"]):
+            db["radio_answers_count"] = radio_answers_count
             new = answers[-diff:]
-            async with client.radio_answers_channel.typing():
-                for answer in new:
-                    await client.radio_answers_channel.send(f"""{answer[0]}
+            for answer in new:
+                await self.radio_answers_channel.send(f"""{answer[0]}
 ラジオネーム: {answer[1]}
 性別: {answer[2]}
 年代: {answer[3]}
@@ -188,7 +182,7 @@ async def loop() -> None:
 
         if now.minute % 2 == 0:
             try:
-                client.check_radio_answers()
+                await client.check_radio_answers()
             except BaseException as e:
                 print(e)
 
