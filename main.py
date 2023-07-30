@@ -48,8 +48,9 @@ class Pengan(discord.Client):
 
         for guild in self.guilds:
             for channel in guild.channels:
-                async for message in channel.history(after=last_working):
-                    await self.reaction(message)
+                if hasattr(channel, "history"):
+                    async for message in channel.history(after=last_working):
+                        await self.reaction(message)
 
         print(f"""We have logged in as {self.user}
 """)
