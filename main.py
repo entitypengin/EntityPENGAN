@@ -96,7 +96,7 @@ class Pengan(discord.Client):
 
     async def reaction(self, message: discord.Message):
         for reaction in reactions:
-            if re.match(reaction["regex"], message.content):
+            if re.search(reaction["regex"], message.content):
                 await message.add_reaction(reaction["reaction"])
 
     async def update_status(self, now) -> None:
