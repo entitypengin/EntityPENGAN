@@ -114,6 +114,8 @@ class Pengan(discord.Client):
             if self.status == Status.OYASUMI:
                 self.status = Status.CHARGE
             await message.add_reaction("\U0001f5a4")
+        if "10 years in the joint made you a fucking pussy" in message.content.lower():
+            await message.add_reaction("<:10yearsinthejointmadeyouafucking:1140457966009593977>")
 
     async def update_status(self, now) -> None:
         if 13 <= now.hour < 15:
@@ -127,6 +129,8 @@ class Pengan(discord.Client):
         if now.minute == 0:
             if now.hour == 22:
                 await self.main_channel.send("ohayo")
+            elif now.hour == 1:
+                await self.main_channel.send("10 years in the joint made you a fucking pussy")
             elif now.hour == 13:
                 await self.main_channel.send("oyasumi")
             elif now.hour == 15:
