@@ -3,6 +3,7 @@
 
 import datetime
 import random
+import re
 
 import discord
 from discord.ext import tasks
@@ -14,6 +15,8 @@ from constants import (
     SHEET_CREDS,
     SPREADSHEET_ID,
     Status,
+    messages,
+    reactions,
 )
 import radio
 from server import keep_alive
@@ -51,12 +54,6 @@ class Pengan(discord.Client):
         print(f"""We have logged in as {self.user}
 """)
         await self.bot_channel.send(f"We have logged in as {self.user}")
-
-        """        async for message in client.get_channel().history(limit=20):
-            print(message.content)
-        await self.main_channel.send("これ実は1/10の確率でgeosta全文言うようにしてるんだよね")
-        await self.main_channel.guild.get_member(self.user.id).edit(nick=None)
-        """
 
         loop.start()
 
@@ -98,24 +95,9 @@ class Pengan(discord.Client):
         await self.reaction(message)
 
     async def reaction(self, message: discord.Message):
-        if "ohayo" in message.content.lower():
-            await message.add_reaction("\U0001f5a4")
-        if "oyasumi" in message.content.lower():
-            await message.add_reaction("<:emoji_2:1074290659135066163>")
-        if "geosta" in message.content.lower() or "努力 未来 a geoffroyi star" in message.content.lower():
-            await message.add_reaction("<:PENGIN_LV98:1097096256939114517>")
-        if (
-            "ecchi" in message.content.lower()
-            or "えっち" in message.content.lower()
-            or "エッチ" in message.content.lower()
-        ):
-            await message.add_reaction("<:otonadechi:1065560408934592582>")
-        if "充 電 し な き ゃ 　敵 の 命 で ね" in message.content.lower():
-            if self.status == Status.OYASUMI:
-                self.status = Status.CHARGE
-            await message.add_reaction("\U0001f5a4")
-        if "10 years in the joint made you a fucking pussy" in message.content.lower():
-            await message.add_reaction("<:10yearsinthejointmadeyouafucking:1140457966009593977>")
+        for reaction in reactions:
+            if re.match(reaction["regex"], message.content):
+                await message.add_reaction(reaction["reaction"])
 
     async def update_status(self, now) -> None:
         if 13 <= now.hour < 15:
@@ -127,16 +109,9 @@ class Pengan(discord.Client):
             self.status = Status.OHAYO
 
         if now.minute == 0:
-            if now.hour == 22:
-                await self.main_channel.send("ohayo")
-            elif now.hour == 1:
-                await self.main_channel.send("10 years in the joint made you a fucking pussy")
-            elif now.hour == 13:
-                await self.main_channel.send("oyasumi")
-            elif now.hour == 15:
-                await self.main_channel.send(
-                    "geosta" if random.random() < 0.9 else "努力 未来 a geoffroyi star"
-                )
+            for message in messages:
+                if now.hour == message["time"]:
+                    await self.main_channel.send(random.choice(message["texts"]))
 
     async def update_presence(self) -> None:
         if self.status == Status.OHAYO:

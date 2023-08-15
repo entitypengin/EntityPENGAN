@@ -2,7 +2,9 @@
 # -*- coding: utf-8 -*-
 
 from enum import Enum
+import json
 import os
+from typing import Any
 
 
 class Status(Enum):
@@ -30,4 +32,10 @@ SHEET_CREDS = {
     "scopes": ["https://www.googleapis.com/auth/spreadsheets.readonly"],
     "expiry": "2023-05-24T08:48:49.831711Z"
 }
+
+with open("messages.json") as f:
+    messages_data = json.load(f)
+
+messages: list[dict[str, Any]] = messages_data["messages"]
+reactions: list[dict[str, Any]] = messages_data["reactions"]
 

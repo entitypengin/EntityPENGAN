@@ -1,0 +1,63 @@
+{
+    "messages": [
+        {
+            "texts": [
+                "10 years in the joint made you a fucking pussy"
+            ],
+            "time": 1
+        },
+        {
+            "texts": [
+                "oyasumi"
+            ],
+            "time": 13
+        },
+        {
+            "texts": [
+                "geosta",
+                "geosta",
+                "geosta",
+                "geosta",
+                "geosta",
+                "geosta",
+                "geosta",
+                "geosta",
+                "geosta",
+                "\u52aa\u529b \u672a\u6765 a geoffroyi star"
+            ],
+            "time": 15
+        },
+        {
+            "texts": [
+                "ohayo"
+            ],
+            "time": 22
+        }
+    ],
+    "reactions": [
+        {
+            "regex": "(?i)oyasumi",
+            "reaction": "<:emoji_2:1074290659135066163>"
+        },
+        {
+            "regex": "(?i)(geosta)|(geoffroyi)|(\u52aa\u529b)|(未来)",
+            "reaction": "<:PENGIN_LV98:1097096256939114517>"
+        },
+        {
+            "regex": "(?i)ohayo",
+            "reaction": "\uD83D\uDDA4"
+        },
+        {
+            "regex": "(?i)(ecchi)|(\u3048\u3063\u3061)|(\u30a8\u30c3\u30c1)",
+            "reaction": "<:otonadechi:1065560408934592582>"
+        },
+        {
+            "regex": "^\u5145 \u96fb \u3057 \u306a \u304d \u3083 \u3000\u6575 \u306e \u547d \u3067 \u306d$",
+            "reaction": "\uD83D\uDDA4"
+        },
+        {
+            "regex": "(?i)10 years in the joint",
+            "reaction": "<:10yearsinthejointmadeyouafucking:1140457966009593977>"
+        }
+    ]
+}
