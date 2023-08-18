@@ -40,8 +40,12 @@
             "reaction": "<:emoji_2:1074290659135066163>"
         },
         {
-            "regex": "(?i)(geosta)|(geoffroyi)|(\u52aa\u529b)|(未来)",
+            "regex": "(?is)(geosta)|(\u52aa\u529b)|(未来)|(a .+ star)",
             "reaction": "<:PENGIN_LV98:1097096256939114517>"
+        },
+        {
+            "regex": "(?is)geoffroyi",
+            "reaction": "<:emoji_20:1117262892220289054>"
         },
         {
             "regex": "(?i)ohayo",
