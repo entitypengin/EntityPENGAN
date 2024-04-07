@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from google.oauth2.credentials import Credentials
+"""from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError, UnknownApiNameOrVersion
 
@@ -29,3 +29,4 @@ def get_answers(spreadsheet_id: str, sheet_creds_dict: dict[str, str]) -> list[l
 
     except HttpError:
         return []
+"""

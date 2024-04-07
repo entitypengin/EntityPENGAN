@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6cb57b35-1818-4ffa-a53e-025e9216670d" name="Changes" comment="search">
+    <list default="true" id="6cb57b35-1818-4ffa-a53e-025e9216670d" name="Changes" comment="regex">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages.json" beforeDir="false" afterPath="$PROJECT_DIR$/messages.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,13 +46,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1684923141636</updated>
-    </task>
-    <task id="LOCAL-00018" summary="status4">
-      <created>1685077429920</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1685077429920</updated>
     </task>
     <task id="LOCAL-00019" summary="status4">
       <created>1685077657710</created>
@@ -391,7 +383,14 @@
       <option name="project" value="LOCAL" />
       <updated>1692072995355</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="regex">
+      <created>1692356558146</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1692356558146</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -406,7 +405,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="deleted venv" />
     <MESSAGE value="something" />
     <MESSAGE value="delete replit" />
     <MESSAGE value="channel" />
@@ -431,6 +429,7 @@
     <MESSAGE value="hasattr" />
     <MESSAGE value="google" />
     <MESSAGE value="search" />
-    <option name="LAST_COMMIT_MESSAGE" value="search" />
+    <MESSAGE value="regex" />
+    <option name="LAST_COMMIT_MESSAGE" value="regex" />
   </component>
 </project>

@@ -12,13 +12,13 @@ from replit import db
 from constants import (
     Channels,
     DISCORD_TOKEN,
-    SHEET_CREDS,
-    SPREADSHEET_ID,
+    # SHEET_CREDS,
+    # SPREADSHEET_ID,
     Status,
     messages,
     reactions,
 )
-import radio
+# import radio
 from server import keep_alive
 
 
@@ -131,7 +131,8 @@ class Pengan(discord.Client):
                 status=discord.Status.dnd, activity=discord.Game(name="努力", type=1)
             )
 
-    async def check_radio_answers(self) -> None:
+
+'''    async def check_radio_answers(self) -> None:
         answers = radio.get_answers(SPREADSHEET_ID, SHEET_CREDS)
         radio_answers_count = len(answers)
         if 0 < (diff := radio_answers_count - db["radio_answers_count"]):
@@ -145,6 +146,7 @@ class Pengan(discord.Client):
 地域: {answer[4]}
 
 {answer[5]}""")
+'''
 
 
 @tasks.loop(seconds=60)
@@ -159,11 +161,11 @@ async def loop() -> None:
         await client.update_status(now)
         await client.update_presence()
 
-        if now.minute % 2 == 0:
-            try:
-                await client.check_radio_answers()
-            except BaseException as e:
-                print(e)
+        # if now.minute % 2 == 0:
+        #     try:
+        #         await client.check_radio_answers()
+        #     except BaseException as e:
+        #         print(e)
 
     except BaseException as e:
         print(e)
